@@ -18,6 +18,25 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\Credits.cpp" />
+    <ClCompile Include="Src\FinalResults.cpp" />
+    <ClCompile Include="Src\GameData.cpp" />
+    <ClCompile Include="Src\Instructions.cpp" />
+    <ClCompile Include="Src\main.cpp" />
+    <ClCompile Include="Src\Menu.cpp" />
+    <ClCompile Include="Src\MenuManager.cpp" />
+    <ClCompile Include="Src\Pause.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Src\Credits.h" />
+    <ClInclude Include="Src\FinalResults.h" />
+    <ClInclude Include="Src\GameData.h" />
+    <ClInclude Include="Src\Instructions.h" />
+    <ClInclude Include="Src\Menu.h" />
+    <ClInclude Include="Src\MenuManager.h" />
+    <ClInclude Include="Src\Pause.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -159,9 +178,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

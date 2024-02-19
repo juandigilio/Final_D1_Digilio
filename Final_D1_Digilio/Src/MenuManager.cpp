@@ -4,16 +4,18 @@
 #include <vector>
 
 #include "GameData.h"
-#include "Player.h"
-#include "Enemy.h"
+//#include "Player.h"
+//#include "Enemy.h"
 #include "Menu.h"
 #include "Credits.h"
 #include "Instructions.h"
-#include "Pause.h"
-#include "FinalResults.h"
-#include "GameLoop.h"
-#include "Parallax.h"
+//#include "Pause.h"
+//#include "FinalResults.h"
+//#include "GameLoop.h"
+//#include "Parallax.h"
 
+
+using namespace GameData;
 
 namespace MenuManager
 {
@@ -23,7 +25,7 @@ namespace MenuManager
 
 		SetConfigFlags(FLAG_MSAA_4X_HINT);
 
-		InitWindow(screenWidth, screenHeight, "2042");
+		InitWindow(screenWidth, screenHeight, "1952");
 
 		InitAudioDevice();
 
