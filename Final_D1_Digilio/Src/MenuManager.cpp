@@ -1,18 +1,17 @@
 #include "MenuManager.h"
 
 #include <iostream>
-#include <vector>
 
 #include "GameData.h"
-//#include "Player.h"
-//#include "Enemy.h"
+#include "Player.h"
+
 #include "Menu.h"
 #include "Credits.h"
 #include "Instructions.h"
-//#include "Pause.h"
-//#include "FinalResults.h"
+#include "Pause.h"
+#include "FinalResults.h"
 //#include "GameLoop.h"
-//#include "Parallax.h"
+
 
 
 using namespace GameData;
@@ -25,7 +24,7 @@ namespace MenuManager
 
 		SetConfigFlags(FLAG_MSAA_4X_HINT);
 
-		InitWindow(screenWidth, screenHeight, "1952");
+		InitWindow(screenWidth, screenHeight, "Multiversing");
 
 		InitAudioDevice();
 
@@ -36,9 +35,8 @@ namespace MenuManager
 
 	static void UnloadTextures(Player& player)
 	{
-		GameLoop::UnloadGameLoopTextures();
+		//GameLoop::UnloadGameLoopTextures();
 		Menu::UnloadMenuTextures();
-		ParallaxUtilities::UnloadParallaxTextures();
 		PlayerUtilities::UnloadPlayerTextures(player);
 	}
 
@@ -46,7 +44,6 @@ namespace MenuManager
 	{
 		GameSceen currentSceen = GameSceen::MENU;
 		Player player;
-		vector<Enemy> enemies;
 
 		StartUp();
 
@@ -64,7 +61,7 @@ namespace MenuManager
 				}
 				case GameSceen::GAME:
 				{
-					GameLoop::Play(player, enemies, currentSceen);
+					//GameLoop::Play(player, enemies, currentSceen);
 					break;
 				}
 				case GameSceen::RESULTS:
@@ -74,7 +71,7 @@ namespace MenuManager
 				}
 				case GameSceen::PAUSE:
 				{
-					Pause::ShowPause(player, enemies, currentSceen);
+					Pause::ShowPause(player, currentSceen);
 					break;
 				}
 				case GameSceen::INSTRUCTIONS:
@@ -89,7 +86,6 @@ namespace MenuManager
 				}
 				case GameSceen::EXIT:
 				{
-					EnemyUtilities::DeleteEnemies(enemies);
 					CloseWindow();
 					break;
 				}

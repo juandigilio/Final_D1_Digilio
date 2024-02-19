@@ -89,9 +89,9 @@ namespace Pause
 
 	}
 
-	static void DrawPause(Player player, vector<Enemy> enemies, GameSceen& currentSceen)
+	static void DrawPause(Player player, GameSceen& currentSceen)
 	{
-		GameLoop::DrawGame(player, enemies, currentSceen);
+		GameLoop::DrawGame(player, currentSceen);
 
 		smallWindowPos.x = (screenWidth / 2.0f) - (smallWindow.width / 2.0f);
 		smallWindowPos.y = (screenHeight / 2.0f) - (smallWindow.height / 2.0f);
@@ -112,9 +112,9 @@ namespace Pause
 		DrawTextEx(font, "Press ESC to continue", textPos, fontSize * 0.35f, spacing / 8.0f, RAYWHITE);
 	}
 
-	void ShowPause(Player player, vector<Enemy> enemies, GameSceen& currentSceen)
+	void ShowPause(Player player, GameSceen& currentSceen)
 	{
-		DrawPause(player, enemies, currentSceen);
+		DrawPause(player, currentSceen);
 
 		UpdateMusicStream(menuMusic);
 

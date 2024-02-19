@@ -27,6 +27,7 @@
     <ClCompile Include="Src\Menu.cpp" />
     <ClCompile Include="Src\MenuManager.cpp" />
     <ClCompile Include="Src\Pause.cpp" />
+    <ClCompile Include="Src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Src\Credits.h" />
@@ -36,6 +37,7 @@
     <ClInclude Include="Src\Menu.h" />
     <ClInclude Include="Src\MenuManager.h" />
     <ClInclude Include="Src\Pause.h" />
+    <ClInclude Include="Src\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
