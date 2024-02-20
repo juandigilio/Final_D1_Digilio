@@ -5,6 +5,8 @@ namespace MainScreen
 {
 	Texture2D mainBackground;
 
+	Rectangle pad = { 90.0f, 590.0f,126.0f, 121.0f };
+
 	Texture2D upButton;
 	Vector2 upButtonPos;
 
@@ -20,11 +22,24 @@ namespace MainScreen
 	Texture2D enterButton;
 	Vector2 enterButtonPos;
 
-	bool isUpButtonPressed = false;
-	bool isDownButtonPressed = false;
-	bool isLeftButtonPressed = false;
-	bool isRightButtonPressed = false;
-	bool isEnterButtonPressed = false;
+	
+	static void SetButtonsPositions()
+	{
+		upButtonPos.x = pad.x + pad.width / 2.0f + upButton.width / 2.0f;
+		upButtonPos.y = pad.y + upButton.height + 5.0f;
+
+		downButtonPos.x = upButtonPos.x + 5.0f;
+		downButtonPos.y = upButtonPos.y + downButton.height;
+
+		leftButtonPos.x = downButtonPos.x - leftButton.width;
+		leftButtonPos.y = downButtonPos.y - 5.0f;
+
+		rightButtonPos.x = downButtonPos.x + rightButton.width;
+		rightButtonPos.y = downButtonPos.y + 5.0f;
+
+		enterButtonPos.x = upButtonPos.x + enterButton.width + 15.0f;
+		enterButtonPos.y = upButtonPos.y + 15.0f;
+	}
 
 	void LoadAssets()
 	{
@@ -35,6 +50,7 @@ namespace MainScreen
 		rightButton = LoadTexture("Assets/Images/Main/RightButton.png");
 		enterButton = LoadTexture("Assets/Images/Main/EnterButton.png");
 	}
+
 
 	static void DrawButton(Texture2D button, Vector2 buttonPos, bool isButtonPressed)
 	{

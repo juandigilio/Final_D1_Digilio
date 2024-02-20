@@ -36,4 +36,12 @@ namespace GameData
 
 	extern double pauseTimer;
 	extern double pauseDelay;
+
+	extern bool isUpButtonPressed;
+	extern bool isDownButtonPressed;
+	extern bool isLeftButtonPressed;
+	extern bool isRightButtonPressed;
+	extern bool isEnterButtonPressed;
+
+	extern double buttonTimer;
 }

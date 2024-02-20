@@ -22,4 +22,14 @@ namespace GameData
 
 	double pauseTimer = 0.0f;
 	double pauseDelay = 0.2f;
+
+	bool isUpButtonPressed = false;
+	bool isDownButtonPressed = false;
+	bool isLeftButtonPressed = false;
+	bool isRightButtonPressed = false;
+	bool isEnterButtonPressed = false;
+
+	double buttonTimer{};
+
+	Rectangle gameScreen{96.0f, 30.0f, 852.0f, 506.0f};
 }
