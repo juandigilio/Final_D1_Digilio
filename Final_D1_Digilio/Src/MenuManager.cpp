@@ -55,7 +55,7 @@ namespace MenuManager
 			{
 				case GameSceen::MENU:
 				{
-					Menu::ShowMenu(currentSceen);
+					Menu::ShowMenu();
 					break;
 				}
 				case GameSceen::GAME:
@@ -71,16 +71,6 @@ namespace MenuManager
 				case GameSceen::PAUSE:
 				{
 					Pause::ShowPause(player, currentSceen);
-					break;
-				}
-				case GameSceen::INSTRUCTIONS:
-				{
-					Instructions::ShowInstructions(currentSceen);
-					break;
-				}
-				case GameSceen::CREDITS:
-				{
-					Credits::ShowCredits(currentSceen);
 					break;
 				}
 				case GameSceen::EXIT:

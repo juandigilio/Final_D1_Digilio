@@ -21,8 +21,8 @@ namespace Credits
 
 		actualPos = playPosCenter;
 
-		actualPos.x = actualPos.x + gameScreen.width * 2.0f - MeasureTextEx(font, "Menu assets by TheMemeLord4", fontSize * 0.25f, spacing / 8.0f).x / 2.0f;
+		actualPos.x = actualPos.x + gameScreen.width * 2.0f - MeasureTextEx(font, "Cars assets by TheMemeLord4", fontSize * 0.25f, spacing / 8.0f).x / 2.0f;
 		actualPos.y += 60;
-		DrawTextEx(font, "Menu assets by TheMemeLord4", actualPos, fontSize * 0.25f, spacing / 8.0f, BLACK);
+		DrawTextEx(font, "Cars assets by TheMemeLord4", actualPos, fontSize * 0.25f, spacing / 8.0f, BLACK);
 	}
 }
