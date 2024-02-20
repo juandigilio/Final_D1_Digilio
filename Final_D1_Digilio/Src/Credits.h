@@ -1,10 +1,8 @@
 #pragma once
 
-#include "GameData.h"
-
-using namespace GameData;
+#include "raylib.h"
 
 namespace Credits
 {
-	extern void ShowCredits(GameSceen& currentSceen);
+	extern void DrawCredits(Vector2 playPosCenter);
 }
