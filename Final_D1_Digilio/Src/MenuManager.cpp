@@ -50,7 +50,7 @@ namespace MenuManager
 		while (currentSceen != GameSceen::EXIT && !WindowShouldClose())
 		{
 			BeginDrawing();
-			ClearBackground(RAYWHITE);
+			ClearBackground(BLACK);
 
 			switch (currentSceen)
 			{
