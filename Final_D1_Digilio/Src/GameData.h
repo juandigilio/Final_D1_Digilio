@@ -44,4 +44,6 @@ namespace GameData
 	extern bool isEnterButtonPressed;
 
 	extern double buttonTimer;
+
+	extern Rectangle gameScreen;
 }

@@ -10,6 +10,7 @@
 #include "Instructions.h"
 #include "Pause.h"
 #include "FinalResults.h"
+#include "MainScreen.h"
 //#include "GameLoop.h"
 
 
@@ -24,11 +25,9 @@ namespace MenuManager
 
 		SetConfigFlags(FLAG_MSAA_4X_HINT);
 
-		InitWindow(screenWidth, screenHeight, "Multiversing");
+		InitWindow(screenWidth, screenHeight, "Gran-Turismo 14");
 
 		InitAudioDevice();
-
-		Menu::InitMenu();
 
 		PlayMusicStream(menuMusic);
 	}
@@ -61,7 +60,7 @@ namespace MenuManager
 				}
 				case GameSceen::GAME:
 				{
-					//GameLoop::Play(player, enemies, currentSceen);
+					//GameLoop::Play(player, enemies, currentScreen);
 					break;
 				}
 				case GameSceen::RESULTS:
@@ -90,6 +89,8 @@ namespace MenuManager
 					break;
 				}
 			}
+
+			MainScreen::DrawMainScreen();
 
 			EndDrawing();
 		}

@@ -9,9 +9,5 @@ using namespace GameData;
 
 namespace Menu
 {
-	extern void ShowMenu(GameSceen& currentSceen);
-
-	extern void InitMenu();
-
-	extern void UnloadMenuTextures();
+	extern void ShowMenu();
 }
