@@ -2,10 +2,11 @@
 
 #include "GameData.h"
 
+#include "raylib.h"
 
 using namespace GameData;
 
 namespace Instructions
 {
-	void ShowInstructions(GameSceen& currentSceen);
+	extern void DrawInstructions(Vector2 playPosCenter);
 }
