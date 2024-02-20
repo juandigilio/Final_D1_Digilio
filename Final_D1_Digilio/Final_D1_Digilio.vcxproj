@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MainScreen.cpp" />
     <ClCompile Include="Src\Credits.cpp" />
     <ClCompile Include="Src\FinalResults.cpp" />
     <ClCompile Include="Src\GameData.cpp" />
@@ -30,6 +31,7 @@
     <ClCompile Include="Src\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MainScreen.h" />
     <ClInclude Include="Src\Credits.h" />
     <ClInclude Include="Src\FinalResults.h" />
     <ClInclude Include="Src\GameData.h" />
