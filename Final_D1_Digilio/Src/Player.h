@@ -42,5 +42,5 @@ namespace PlayerUtilities
 
     extern void DrawPlayer(Player& player);
 
-    extern void UnloadPlayerTextures(Player& player);
+    extern void UnloadPlayerTexture(Player& player);
 }

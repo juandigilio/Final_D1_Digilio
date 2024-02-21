@@ -10,15 +10,14 @@ using namespace std;
 
 namespace PlayerUtilities
 {
-	void LoadPlayer(Player& player1, Player& player2, Player& player3)
+	void LoadPlayer(Player& player)
 	{
-        player1.texture = LoadTexture("Assets/Images/ship.png");
-        player1.position.x = screenWidth - player1.texture.width;
-        player1.position.y = static_cast<float>(screenHeight - screenHeight / 6 - player1.texture.height);
-        player1.source = { 0, 0, static_cast<float>(player1.texture.width), static_cast<float>(player1.texture.height) };
-        player1.frame = 0;       
-        player1.lastFrame = 0.0f;
-        
+        player.texture = LoadTexture("Assets/Images/ship.png");
+        player.position.x = static_cast<float>(screenWidth - player.texture.width);
+        player.position.y = static_cast<float>(screenHeight - screenHeight / 6 - player.texture.height);
+        player.source = { 0, 0, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
+        player.frame = 0;       
+        player.lastFrame = 0.0f;
 	}
 
     static void MovePlayer(Player& player, Rectangle level)
@@ -158,7 +157,7 @@ namespace PlayerUtilities
 
 	}
 
-    void UnloadPlayerTextures(Player& player)
+    void UnloadPlayerTexture(Player& player)
     {
         UnloadTexture(player.texture);
     }
