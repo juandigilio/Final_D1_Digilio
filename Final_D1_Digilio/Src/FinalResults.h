@@ -7,5 +7,5 @@ using namespace GameData;
 
 namespace FinalResults
 {
-	void ShowResults(Player& player, GameSceen& currentSceen);
+	//void ShowResults(Player& player, GameSceen& currentSceen);
 }

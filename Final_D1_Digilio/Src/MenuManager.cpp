@@ -29,14 +29,15 @@ namespace MenuManager
 
 		InitAudioDevice();
 
-		PlayMusicStream(menuMusic);
+		MainScreen::LoadAssets();
+
+		//PlayMusicStream(menuMusic);
 	}
 
 	static void UnloadTextures(Player& player)
 	{
-		//GameLoop::UnloadGameLoopTextures();
-		Menu::UnloadMenuTextures();
-		PlayerUtilities::UnloadPlayerTextures(player);
+		MainScreen::UnloadMainTextures();
+		PlayerUtilities::UnloadPlayerTexture(player);
 	}
 
 	void RunGame()
@@ -56,6 +57,7 @@ namespace MenuManager
 				case GameSceen::MENU:
 				{
 					Menu::ShowMenu();
+					MainScreen::DrawMainScreen();
 					break;
 				}
 				case GameSceen::GAME:
@@ -65,16 +67,17 @@ namespace MenuManager
 				}
 				case GameSceen::RESULTS:
 				{
-					FinalResults::ShowResults(player, currentSceen);
+					//FinalResults::ShowResults(player, currentSceen);
 					break;
 				}
 				case GameSceen::PAUSE:
 				{
-					Pause::ShowPause(player, currentSceen);
+					Pause::ShowPause(currentSceen);
 					break;
 				}
 				case GameSceen::EXIT:
 				{
+					UnloadTextures(player);
 					CloseWindow();
 					break;
 				}
