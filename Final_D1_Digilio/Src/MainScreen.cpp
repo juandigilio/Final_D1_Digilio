@@ -1,5 +1,6 @@
 #include "MainScreen.h"
 
+#include "GameData.h"
 
 namespace MainScreen
 {
@@ -21,6 +22,12 @@ namespace MainScreen
 
 	Texture2D enterButton;
 	Vector2 enterButtonPos;
+
+	bool isUpButtonPressed = false;
+	bool isDownButtonPressed = false;
+	bool isLeftButtonPressed = false;
+	bool isRightButtonPressed = false;
+	bool isEnterButtonPressed = false;
 
 	
 	static void SetButtonsPositions()
@@ -49,6 +56,10 @@ namespace MainScreen
 		leftButton = LoadTexture("Assets/Images/Main/LeftButton.png");
 		rightButton = LoadTexture("Assets/Images/Main/RightButton.png");
 		enterButton = LoadTexture("Assets/Images/Main/EnterButton.png");
+
+		GameData::font = LoadFont("Assets/Fonts/Minecraft.TTF");
+
+		SetButtonsPositions();
 	}
 
 
@@ -90,5 +101,7 @@ namespace MainScreen
 		UnloadTexture(leftButton);
 		UnloadTexture(rightButton);
 		UnloadTexture(enterButton);
+		
+		UnloadFont(GameData::font);
 	}
 }
