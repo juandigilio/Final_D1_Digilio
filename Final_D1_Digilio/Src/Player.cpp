@@ -12,15 +12,15 @@ namespace PlayerUtilities
 {
 	void LoadPlayer(Player& player)
 	{
-        player.texture = LoadTexture("Assets/Images/ship.png");
+        player.texture = LoadTexture("Assets/Images/Main/Player.png");
         player.position.x = static_cast<float>(screenWidth - player.texture.width);
-        player.position.y = static_cast<float>(screenHeight - screenHeight / 6 - player.texture.height);
+        player.position.y = static_cast<float>(screenHeight - player.texture.height * 1.5f);
         player.source = { 0, 0, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
         player.frame = 0;       
         player.lastFrame = 0.0f;
 	}
 
-    static void MovePlayer(Player& player, Rectangle level)
+    static void MovePlayer(Player& player)
     {
         player.position.x += player.velocity.x * GetFrameTime();
         player.position.y += player.velocity.y * GetFrameTime();
@@ -33,17 +33,9 @@ namespace PlayerUtilities
         {
             player.position.x = 0.0f;
         }
-        else if (player.position.y > level.y - player.texture.height)
-        {
-            player.position.y = level.y + player.texture.height;
-        }
-        else if (player.position.y < level.y)
-        {
-            player.position.y = level.y;
-        }
     }
 
-	void GetPlayerInput(Player& player, GameSceen& currentSceen)
+	void GetPlayerInput(Player& player, GameScreen& currentScreen)
 	{
         SetExitKey(KEY_Q);
 
@@ -77,7 +69,7 @@ namespace PlayerUtilities
             player.velocity.x = 0.0f;
         }
 
-        if (player.velocity.x == 0 && player.velocity.y == 0)
+        if (player.velocity.x == 0.0f && player.velocity.y == 0.0f)
         {
             player.isWalking = false;
         }
@@ -86,75 +78,61 @@ namespace PlayerUtilities
 
         if (IsKeyDown(KEY_ESCAPE) && elapsedTime > pauseDelay)
         {
-            currentSceen = GameSceen::PAUSE;
+            currentScreen = GameScreen::PAUSE;
         }
 	}
 
-	void UpdatePlayer(Player& player, Rectangle level)
+	void UpdatePlayer(Player& player, GameScreen& currentScreen)
 	{
-        MovePlayer(player, level);
+        MovePlayer(player);
+
+        GetPlayerInput(player, currentScreen);
 	}
 
 	void DrawPlayer(Player& player)
 	{
-        const float rotationCenterX = 50.0f;
-        const float rotationCenterY = 50.0f;
-        Vector2 origin = { rotationCenterX, rotationCenterY };
+        Vector2 origin = { 0.0f, 0.0f };
+        Rectangle dest = { player.position.x, player.position.y, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
 
         if (player.isWalking)
         {
-            Rectangle dest = { player.GetCenter().x, player.GetCenter().y, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
-
             switch (player.frame)
             {
-            case 0:
-            {
-                player.source = { static_cast<float>(player.texture.width), 0, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
-                DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
-                break;
+                case 0:
+                {
+                    player.source = { static_cast<float>(player.texture.width / 3.0f), 0, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
+                    DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
+                    break;
+                }
+                case 1:
+                {
+                    player.source = { static_cast<float>(player.texture.width / 3.0f) * 2, 0, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
+                    DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
+                    break;
+                }
             }
-            case 1:
-            {
-                player.source = { static_cast<float>(player.texture.width) * 2, 0, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
-                DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
-                break;
-            }
-            case 2:
-            {
-                player.source = { static_cast<float>(player.texture.width) * 3, 0, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
-                DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
-                break;
-            }
-            case 3:
-            {
-                player.source = { static_cast<float>(player.texture.width) * 4, 0, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
-                DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
-                break;
-            }
-            }
+
+            cout << player.frame;
 
             double elapsedTime = GetTime() - player.lastFrame;
 
-            if (elapsedTime > 0.07f)
+            if (elapsedTime > 0.04f)
             {
                 player.frame++;
 
                 player.lastFrame = GetTime();
 
-                if (player.frame > 3)
+                if (player.frame > 1)
                 {
                     player.frame = 0;
                 }
             }
         }
-       /* else if (!player.isColliding)
+        else
         {
-            Rectangle dest = { player.GetCenter().x, player.GetCenter().y, player.width, player.height };
-            player.source = { 0, 0, player.width, player.height };
-
+            player.source = { 0.0f, 0.0f, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
             DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
-        }*/
-
+        }
 	}
 
     void UnloadPlayerTexture(Player& player)
