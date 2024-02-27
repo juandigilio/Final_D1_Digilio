@@ -18,9 +18,13 @@ namespace MainScreen
 	Vector2 enterButtonPos;
 
 	bool isLeftButtonPressed = false;
+	bool isLeftButtonHold = false;
 	bool isRightButtonPressed = false;
+	bool isRightButtonHold = false;
 	bool isEnterButtonPressed = false;
+	bool isEnterButtonHold = false;
 
+	bool isComputerOn = false;
 	
 	static void SetButtonsPositions()
 	{
@@ -48,13 +52,13 @@ namespace MainScreen
 		SetButtonsPositions();
 	}
 
-	static void DrawButton(Texture2D button, Vector2 buttonPos, bool isButtonPressed)
+	static void DrawButton(Texture2D button, Vector2 buttonPos, bool isButtonHold)
 	{
 		Vector2 origin = { 0, 0 };
 		Rectangle dest = { buttonPos.x, buttonPos.y, button.width / 2.0f,  static_cast<float>(button.height) };
 		Rectangle source;
 
-		if (isButtonPressed)
+		if (isButtonHold)
 		{
 			source = { button.width / 2.0f, 0.0f, button.width / 2.0f, static_cast<float>(button.height) };
 		}
@@ -66,13 +70,64 @@ namespace MainScreen
 		DrawTexturePro(button, source, dest, origin, 0.0f, RAYWHITE);
 	}
 
+	static void CheckButtonsCollision(Player& player)
+	{
+		Rectangle rightRec = {rightButtonPos.x, rightButtonPos.y, rightButton.width / 2.0f, rightButton.height * 1.0f };
+		Rectangle enterRec = {enterButtonPos.x, enterButtonPos.y, enterButton.width / 2.0f, enterButton.height * 1.0f };
+		Rectangle leftRec = {leftButtonPos.x, leftButtonPos.y, leftButton.width / 2.0f, leftButton.height * 1.0f };
+
+		if (CheckCollisionRecs(player.collisionBox, leftRec))
+		{
+			if (!isLeftButtonHold)
+			{
+				isLeftButtonPressed = true;
+				isLeftButtonHold = true;
+			}
+		}
+		else
+		{
+			isLeftButtonHold = false;
+		}
+
+		if (CheckCollisionRecs(player.collisionBox, rightRec))
+		{
+			if (!isRightButtonHold)
+			{
+				isRightButtonPressed = true;
+				isRightButtonHold = true;
+			}
+		}
+		else
+		{
+			isRightButtonHold = false;
+		}
+
+		if (CheckCollisionRecs(player.collisionBox, enterRec))
+		{
+			if (!isEnterButtonHold)
+			{
+				isEnterButtonPressed = true;
+				isEnterButtonHold = true;
+			}
+
+			if (!isComputerOn)
+			{
+				isComputerOn = true;
+			}
+		}
+		else
+		{
+			isEnterButtonHold = false;
+		}
+	}
+
 	static void DrawMainScreen(Player& player)
 	{
 		DrawTexture(mainBackground, 0, 0, WHITE);
 
-		DrawButton(leftButton, leftButtonPos, isLeftButtonPressed);
-		DrawButton(rightButton, rightButtonPos, isRightButtonPressed);
-		DrawButton(enterButton, enterButtonPos, isEnterButtonPressed);
+		DrawButton(leftButton, leftButtonPos, isLeftButtonHold);
+		DrawButton(rightButton, rightButtonPos, isRightButtonHold);
+		DrawButton(enterButton, enterButtonPos, isEnterButtonHold);
 
 		PlayerUtilities::DrawPlayer(player);
 	}
@@ -80,8 +135,10 @@ namespace MainScreen
 	void RunMainScreen(Player& player, GameScreen& currentScreen)
 	{
 		PlayerUtilities::UpdatePlayer(player, currentScreen);
-		DrawMainScreen(player);
 
+		CheckButtonsCollision(player);
+
+		DrawMainScreen(player);
 	}
 
 	void UnloadMainTextures()
