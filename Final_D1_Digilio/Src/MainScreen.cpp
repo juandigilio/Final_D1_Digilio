@@ -6,13 +6,7 @@ namespace MainScreen
 {
 	Texture2D mainBackground;
 
-	Rectangle pad = { 90.0f, 590.0f,126.0f, 121.0f };
-
-	Texture2D upButton;
-	Vector2 upButtonPos;
-
-	Texture2D downButton;
-	Vector2 downButtonPos;
+	Rectangle pad = { 90.0f, 590.0f,167.0f, 121.0f };
 
 	Texture2D leftButton;
 	Vector2 leftButtonPos;
@@ -23,8 +17,6 @@ namespace MainScreen
 	Texture2D enterButton;
 	Vector2 enterButtonPos;
 
-	bool isUpButtonPressed = false;
-	bool isDownButtonPressed = false;
 	bool isLeftButtonPressed = false;
 	bool isRightButtonPressed = false;
 	bool isEnterButtonPressed = false;
@@ -32,36 +24,29 @@ namespace MainScreen
 	
 	static void SetButtonsPositions()
 	{
-		upButtonPos.x = pad.x + pad.width / 2.0f + upButton.width / 2.0f;
-		upButtonPos.y = pad.y + upButton.height + 5.0f;
+		enterButtonPos.x = pad.x + (pad.width / 2.0f) - (enterButton.width / 4.0f);
+		enterButtonPos.y = pad.y - 15.0f;
 
-		downButtonPos.x = upButtonPos.x + 5.0f;
-		downButtonPos.y = upButtonPos.y + downButton.height;
+		leftButtonPos.x = pad.x + 15.0f;
+		leftButtonPos.y = enterButtonPos.y + enterButton.height;
 
-		leftButtonPos.x = downButtonPos.x - leftButton.width;
-		leftButtonPos.y = downButtonPos.y - 5.0f;
-
-		rightButtonPos.x = downButtonPos.x + rightButton.width;
-		rightButtonPos.y = downButtonPos.y + 5.0f;
-
-		enterButtonPos.x = upButtonPos.x + enterButton.width + 15.0f;
-		enterButtonPos.y = upButtonPos.y + 15.0f;
+		rightButtonPos.x = leftButtonPos.x + (leftButton.width / 2.0f) + 10.0f;
+		rightButtonPos.y = leftButtonPos.y - 5.0f;
 	}
 
-	void LoadAssets()
+	void LoadAssets(Player& player)
 	{
 		mainBackground = LoadTexture("Assets/Images/Main/MainBackground.png");
-		upButton = LoadTexture("Assets/Images/Main/UpButton.png");
-		downButton = LoadTexture("Assets/Images/Main/DownButton.png");
 		leftButton = LoadTexture("Assets/Images/Main/LeftButton.png");
 		rightButton = LoadTexture("Assets/Images/Main/RightButton.png");
 		enterButton = LoadTexture("Assets/Images/Main/EnterButton.png");
+
+		PlayerUtilities::LoadPlayer(player);
 
 		GameData::font = LoadFont("Assets/Fonts/Minecraft.TTF");
 
 		SetButtonsPositions();
 	}
-
 
 	static void DrawButton(Texture2D button, Vector2 buttonPos, bool isButtonPressed)
 	{
@@ -78,26 +63,30 @@ namespace MainScreen
 			source = { 0.0f, 0.0f, button.width / 2.0f, static_cast<float>(button.height) };
 		}
 
-
 		DrawTexturePro(button, source, dest, origin, 0.0f, RAYWHITE);
 	}
 
-	void DrawMainScreen()
+	static void DrawMainScreen(Player& player)
 	{
 		DrawTexture(mainBackground, 0, 0, WHITE);
 
-		DrawButton(upButton, upButtonPos, isUpButtonPressed);
-		DrawButton(downButton, downButtonPos, isDownButtonPressed);
 		DrawButton(leftButton, leftButtonPos, isLeftButtonPressed);
 		DrawButton(rightButton, rightButtonPos, isRightButtonPressed);
 		DrawButton(enterButton, enterButtonPos, isEnterButtonPressed);
+
+		PlayerUtilities::DrawPlayer(player);
+	}
+
+	void RunMainScreen(Player& player, GameScreen& currentScreen)
+	{
+		PlayerUtilities::UpdatePlayer(player, currentScreen);
+		DrawMainScreen(player);
+
 	}
 
 	void UnloadMainTextures()
 	{
 		UnloadTexture(mainBackground);
-		UnloadTexture(upButton);
-		UnloadTexture(downButton);
 		UnloadTexture(leftButton);
 		UnloadTexture(rightButton);
 		UnloadTexture(enterButton);

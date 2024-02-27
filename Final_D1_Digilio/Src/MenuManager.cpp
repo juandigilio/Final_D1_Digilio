@@ -19,7 +19,7 @@ using namespace GameData;
 
 namespace MenuManager
 {
-	static void StartUp()
+	static void StartUp(Player& player)
 	{
 		srand(static_cast<unsigned>(time(NULL)));
 
@@ -29,7 +29,7 @@ namespace MenuManager
 
 		InitAudioDevice();
 
-		MainScreen::LoadAssets();
+		MainScreen::LoadAssets(player);
 
 		//PlayMusicStream(menuMusic);
 	}
@@ -42,40 +42,40 @@ namespace MenuManager
 
 	void RunGame()
 	{
-		GameSceen currentSceen = GameSceen::MENU;
+		GameScreen currentScreen = GameScreen::MENU;
 		Player player;
 
-		StartUp();
+		StartUp(player);
 
-		while (currentSceen != GameSceen::EXIT && !WindowShouldClose())
+		while (currentScreen != GameScreen::EXIT && !WindowShouldClose())
 		{
 			BeginDrawing();
 			ClearBackground(BLACK);
 
-			switch (currentSceen)
+			switch (currentScreen)
 			{
-				case GameSceen::MENU:
+				case GameScreen::MENU:
 				{
 					Menu::ShowMenu();
-					MainScreen::DrawMainScreen();
+					//MainScreen::DrawMainScreen(player);
 					break;
 				}
-				case GameSceen::GAME:
+				case GameScreen::GAME:
 				{
 					//GameLoop::Play(player, enemies, currentScreen);
 					break;
 				}
-				case GameSceen::RESULTS:
+				case GameScreen::RESULTS:
 				{
 					//FinalResults::ShowResults(player, currentSceen);
 					break;
 				}
-				case GameSceen::PAUSE:
+				case GameScreen::PAUSE:
 				{
-					Pause::ShowPause(currentSceen);
+					Pause::ShowPause(currentScreen);
 					break;
 				}
-				case GameSceen::EXIT:
+				case GameScreen::EXIT:
 				{
 					UnloadTextures(player);
 					CloseWindow();
@@ -83,7 +83,7 @@ namespace MenuManager
 				}
 			}
 
-			MainScreen::DrawMainScreen();
+			MainScreen::RunMainScreen(player, currentScreen);
 
 			EndDrawing();
 		}

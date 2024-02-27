@@ -2,15 +2,15 @@
 
 #include "raylib.h"
 
+#include "Player.h"
+
 namespace MainScreen
 {
-	extern bool isUpButtonPressed;
-	extern bool isDownButtonPressed;
 	extern bool isLeftButtonPressed;
 	extern bool isRightButtonPressed;
 	extern bool isEnterButtonPressed;
 
-	extern void LoadAssets();
-	extern void DrawMainScreen();
+	extern void LoadAssets(Player& player);
+	extern void RunMainScreen(Player& player, GameScreen& gameScreen);
 	extern void UnloadMainTextures();
 }
