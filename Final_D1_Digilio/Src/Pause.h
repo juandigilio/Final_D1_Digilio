@@ -7,5 +7,5 @@ using namespace GameData;
 
 namespace Pause
 {
-	extern void ShowPause(GameSceen& currentSceen);
+	extern void ShowPause(GameScreen& currentSceen);
 }

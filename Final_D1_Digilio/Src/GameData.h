@@ -5,7 +5,7 @@
 
 namespace GameData
 {
-	enum class GameSceen
+	enum class GameScreen
 	{
 		MENU,
 		GAME,
