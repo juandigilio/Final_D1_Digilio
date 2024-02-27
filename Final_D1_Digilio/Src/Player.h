@@ -12,17 +12,17 @@ struct Player
 {
     Vector2 position{};
     Vector2 velocity{};
-    //float rotation = 0.0f;
     float maxSpeed = 150.0f;
-
-    bool isAlive = true;
 
     Texture2D texture{};
     Rectangle source{};
+    Rectangle collisionBox{};
     int frame{};
     double lastFrame = 0.0f;
     bool isWalking = false;
-    float lastCollide = 0.0f;
+    bool lookingRight = false;
+    bool lookingLeft = true;
+    //float lastCollide = 0.0f;
 
 
     Vector2 GetCenter()

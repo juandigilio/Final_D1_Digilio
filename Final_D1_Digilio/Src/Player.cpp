@@ -18,6 +18,9 @@ namespace PlayerUtilities
         player.source = { 0, 0, static_cast<float>(player.texture.width), static_cast<float>(player.texture.height) };
         player.frame = 0;       
         player.lastFrame = 0.0f;
+
+        player.collisionBox.width = 45.0f;
+        player.collisionBox.height = 7.0f;
 	}
 
     static void MovePlayer(Player& player)
@@ -25,13 +28,25 @@ namespace PlayerUtilities
         player.position.x += player.velocity.x * GetFrameTime();
         player.position.y += player.velocity.y * GetFrameTime();
 
-        if (player.position.x > screenWidth - static_cast<float>(player.texture.width))
+        player.collisionBox.x = player.position.x + 70.0f;
+        player.collisionBox.y = player.position.y + 127.0f;
+
+        if (player.position.x > screenWidth - (player.texture.width / 3.0f))
         {
-            player.position.x = static_cast<float>(screenWidth) - static_cast<float>(player.texture.width);
+            player.position.x = static_cast<float>(screenWidth) - (player.texture.width / 3.0f);
         }
         else if (player.position.x < 0.0f)
         {
             player.position.x = 0.0f;
+        }
+
+        if (player.position.y > screenHeight - player.texture.height)
+        {
+            player.position.y = static_cast<float>(screenHeight) - static_cast<float>(player.texture.height);
+        }
+        else if (player.position.y < 500.0f)
+        {
+            player.position.y = 500.0f;
         }
     }
 
@@ -58,11 +73,15 @@ namespace PlayerUtilities
         {
             player.velocity.x = (-player.maxSpeed);
             player.isWalking = true;
+            player.lookingLeft = true;
+            player.lookingRight = false;
         }
         else if (IsKeyDown(KEY_RIGHT))
         {
             player.velocity.x = (player.maxSpeed);
             player.isWalking = true;
+            player.lookingLeft = false;
+            player.lookingRight = true;
         }
         else
         {
@@ -92,7 +111,14 @@ namespace PlayerUtilities
 	void DrawPlayer(Player& player)
 	{
         Vector2 origin = { 0.0f, 0.0f };
-        Rectangle dest = { player.position.x, player.position.y, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
+        Rectangle dest = { player.position.x, player.position.y, (player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
+
+        float playerWidth = player.texture.width / 3.0f;
+
+        if (player.lookingRight)
+        {
+            playerWidth *= -1.0f;
+        }
 
         if (player.isWalking)
         {
@@ -100,19 +126,17 @@ namespace PlayerUtilities
             {
                 case 0:
                 {
-                    player.source = { static_cast<float>(player.texture.width / 3.0f), 0, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
+                    player.source = { (player.texture.width / 3.0f), 0, playerWidth, static_cast<float>(player.texture.height) };
                     DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
                     break;
                 }
                 case 1:
                 {
-                    player.source = { static_cast<float>(player.texture.width / 3.0f) * 2, 0, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
+                    player.source = { (player.texture.width / 3.0f) * 2, 0, playerWidth, static_cast<float>(player.texture.height) };
                     DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
                     break;
                 }
             }
-
-            cout << player.frame;
 
             double elapsedTime = GetTime() - player.lastFrame;
 
@@ -130,7 +154,7 @@ namespace PlayerUtilities
         }
         else
         {
-            player.source = { 0.0f, 0.0f, static_cast<float>(player.texture.width / 3.0f), static_cast<float>(player.texture.height) };
+            player.source = { 0.0f, 0.0f, playerWidth, static_cast<float>(player.texture.height) };
             DrawTexturePro(player.texture, player.source, dest, origin, 0.0f, RAYWHITE);
         }
 	}
