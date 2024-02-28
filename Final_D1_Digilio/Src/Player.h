@@ -22,7 +22,9 @@ struct Player
     bool isWalking = false;
     bool lookingRight = false;
     bool lookingLeft = true;
-    //float lastCollide = 0.0f;
+
+    Texture carTexture{};
+    Vector2 carPosition{};
 
 
     Vector2 GetCenter()

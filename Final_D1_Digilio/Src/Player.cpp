@@ -162,5 +162,6 @@ namespace PlayerUtilities
     void UnloadPlayerTexture(Player& player)
     {
         UnloadTexture(player.texture);
+        UnloadTexture(player.carTexture);
     }
 }
