@@ -33,9 +33,9 @@ namespace CarSelection
 
 	void LoadAssets()
 	{
-		redCar = LoadTexture("Assets/Images/Cars/RedFerrari.png");
-		blueCar = LoadTexture("Assets/Images/Cars/BlueBugatti.png");
-		yellowCar = LoadTexture("Assets/Images/Cars/YellowLambo.png");
+		redCar = LoadTexture("Assets/Images/Game/Cars/RedFerrari.png");
+		blueCar = LoadTexture("Assets/Images/Game/Cars/BlueBugatti.png");
+		yellowCar = LoadTexture("Assets/Images/Game/Cars/YellowLambo.png");
 
 		pos1 = gameScreen.x + (gameScreen.width / 2.0f) - (redCar.width / 2.0f);
 		pos2 = gameScreen.x - (gameScreen.width * 1.5f) - (blueCar.width / 2.0f);
@@ -83,15 +83,15 @@ namespace CarSelection
 		{
 			if (menuPos == 1)
 			{
-				player.carTexture = LoadTexture("Assets/Images/Cars/RedCar.png");
+				player.carTexture = LoadTexture("Assets/Images/Game/Cars/RedCarTopView.png");
 			}
 			else if (menuPos == 2)
 			{
-				player.carTexture = LoadTexture("Assets/Images/Cars/BlueCar.png");
+				player.carTexture = LoadTexture("Assets/Images/Game/Cars/BlueCarTopView.png");
 			}
 			else if (menuPos == 3)
 			{
-				player.carTexture = LoadTexture("Assets/Images/Cars/YellowCar.png");
+				player.carTexture = LoadTexture("Assets/Images/Game/Cars/YellowCarTopView.png");
 			}
 
 			secondScreen = SecondScreen::PLAY;
