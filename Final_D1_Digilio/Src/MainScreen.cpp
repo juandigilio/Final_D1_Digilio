@@ -1,5 +1,7 @@
 #include "MainScreen.h"
 
+#include <iostream>
+
 #include "GameData.h"
 
 namespace MainScreen
@@ -19,8 +21,10 @@ namespace MainScreen
 
 	bool isLeftButtonPressed = false;
 	bool isLeftButtonHold = false;
+
 	bool isRightButtonPressed = false;
 	bool isRightButtonHold = false;
+
 	bool isEnterButtonPressed = false;
 	bool isEnterButtonHold = false;
 
@@ -113,6 +117,7 @@ namespace MainScreen
 			if (!isComputerOn)
 			{
 				isComputerOn = true;
+				isEnterButtonPressed = false;
 			}
 		}
 		else
