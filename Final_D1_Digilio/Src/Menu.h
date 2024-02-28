@@ -9,5 +9,6 @@ using namespace GameData;
 
 namespace Menu
 {
-	extern void ShowMenu();
+	extern void InitMenu();
+	extern void ShowMenu(GameScreen& currentScreen);
 }
