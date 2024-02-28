@@ -14,6 +14,12 @@ namespace GameData
 		EXIT,
 	};
 
+	enum class SecondScreen
+	{
+		CARSELECTION,
+		PLAY
+	};
+
 	extern const int screenWidth;
 	extern const int screenHeight;
 	extern Vector2 screenCenter;
