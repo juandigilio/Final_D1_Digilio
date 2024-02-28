@@ -6,13 +6,10 @@
 #include "Player.h"
 
 #include "Menu.h"
-//#include "Credits.h"
-//#include "Instructions.h"
-//#include "Pause.h"
-//#include "FinalResults.h"
 #include "MainScreen.h"
 #include "CarSelection.h"
 #include "SecondScreenManager.h"
+#include "Game.h"
 
 
 
@@ -34,11 +31,12 @@ namespace MenuManager
 		Menu::InitMenu();
 	}
 
-	static void UnloadTextures(Player& player)
+	static void UnloadAssets(Player& player)
 	{
-		MainScreen::UnloadMainTextures();
+		MainScreen::UnloadMainAssets();
 		PlayerUtilities::UnloadPlayerTexture(player);
 		CarSelection::UnloadAssets();
+		Game::UnloadAssets();
 	}
 
 	void RunGame()
@@ -77,7 +75,7 @@ namespace MenuManager
 				}
 				case GameScreen::EXIT:
 				{
-					UnloadTextures(player);
+					UnloadAssets(player);
 					CloseWindow();
 					break;
 				}
@@ -88,6 +86,6 @@ namespace MenuManager
 			EndDrawing();
 		}
 
-		UnloadTextures(player);
+		UnloadAssets(player);
 	}
 }

@@ -14,5 +14,5 @@ namespace MainScreen
 
 	extern void LoadAssets(Player& player);
 	extern void RunMainScreen(Player& player, GameScreen& gameScreen);
-	extern void UnloadMainTextures();
+	extern void UnloadMainAssets();
 }

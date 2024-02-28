@@ -144,7 +144,7 @@ namespace MainScreen
 		DrawMainScreen(player);
 	}
 
-	void UnloadMainTextures()
+	void UnloadMainAssets()
 	{
 		UnloadTexture(mainBackground);
 		UnloadTexture(leftButton);
