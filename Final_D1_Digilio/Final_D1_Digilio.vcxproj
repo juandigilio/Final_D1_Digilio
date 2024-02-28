@@ -19,8 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Src\CarSelection.cpp" />
     <ClCompile Include="Src\Credits.cpp" />
     <ClCompile Include="Src\FinalResults.cpp" />
+    <ClCompile Include="Src\Game.cpp" />
     <ClCompile Include="Src\GameData.cpp" />
     <ClCompile Include="Src\Instructions.cpp" />
     <ClCompile Include="Src\main.cpp" />
@@ -29,10 +31,13 @@
     <ClCompile Include="Src\MenuManager.cpp" />
     <ClCompile Include="Src\Pause.cpp" />
     <ClCompile Include="Src\Player.cpp" />
+    <ClCompile Include="Src\SecondScreenManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\CarSelection.h" />
     <ClInclude Include="Src\Credits.h" />
     <ClInclude Include="Src\FinalResults.h" />
+    <ClInclude Include="Src\Game.h" />
     <ClInclude Include="Src\GameData.h" />
     <ClInclude Include="Src\Instructions.h" />
     <ClInclude Include="Src\MainScreen.h" />
@@ -40,6 +45,7 @@
     <ClInclude Include="Src\MenuManager.h" />
     <ClInclude Include="Src\Pause.h" />
     <ClInclude Include="Src\Player.h" />
+    <ClInclude Include="Src\SecondScreenManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
