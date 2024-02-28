@@ -1,7 +1,5 @@
 #include "MainScreen.h"
 
-#include <iostream>
-
 #include "GameData.h"
 
 namespace MainScreen

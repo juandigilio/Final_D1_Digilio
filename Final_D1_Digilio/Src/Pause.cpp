@@ -12,7 +12,7 @@ using namespace Menu;
 
 namespace Pause
 {
-	static void GetPausedInput(GameSceen& currentSceen)
+	static void GetPausedInput(GameScreen& currentSceen)
 	{
 		SetExitKey(KEY_Q);
 
@@ -80,7 +80,7 @@ namespace Pause
 
 		if (IsKeyPressed(KEY_ESCAPE))
 		{
-			currentSceen = GameSceen::GAME;
+			currentSceen = GameScreen::GAME;
 			pauseTimer = GetTime();
 		}
 
@@ -109,7 +109,7 @@ namespace Pause
 		DrawTextEx(font, "Press ESC to continue", textPos, fontSize * 0.35f, spacing / 8.0f, RAYWHITE);
 	}
 
-	void ShowPause(GameSceen& currentSceen)
+	void ShowPause(GameScreen& currentSceen)
 	{
 		DrawPause();
 

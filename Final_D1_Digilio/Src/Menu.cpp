@@ -17,9 +17,6 @@ namespace Menu
 
 	Vector2 playSize;
 
-	float leftLimit;
-	float rightLimit;
-
 	float pos1;
 	float pos2;
 	float pos3;
@@ -74,11 +71,6 @@ namespace Menu
 
 				menuPos--;
 			}
-		}
-
-		if (currentScreen == GameScreen::GAME)
-		{
-			currentScreen = GameScreen::MENU;
 		}
 		
 		if (isEnterButtonPressed && isComputerOn)
