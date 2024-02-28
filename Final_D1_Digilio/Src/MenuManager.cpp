@@ -30,6 +30,7 @@ namespace MenuManager
 		InitAudioDevice();
 
 		MainScreen::LoadAssets(player);
+		Menu::InitMenu();
 
 		//PlayMusicStream(menuMusic);
 	}
@@ -56,8 +57,7 @@ namespace MenuManager
 			{
 				case GameScreen::MENU:
 				{
-					Menu::ShowMenu();
-					//MainScreen::DrawMainScreen(player);
+					Menu::ShowMenu(currentScreen);
 					break;
 				}
 				case GameScreen::GAME:
