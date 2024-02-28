@@ -8,9 +8,9 @@ namespace GameData
 	bool loading = true;
 	int highScore = 0;
 	double spawnRateBase  = 1.4f;
-	double spawnRateHardnes = spawnRateBase;
+	double spawnRateHardness = spawnRateBase;
 	float enemyBaseSpeed  = 200.0f;
-	float enemySpeedHardnes = enemyBaseSpeed;
+	float enemySpeedHardness = enemyBaseSpeed;
 
 	Music menuMusic{};
 	Music gameLoopMusic{};
@@ -18,18 +18,10 @@ namespace GameData
 	Font font{};
 	float fontSize{};
 	float spacing = 8.0f;
-	float instrucrtionsSpacing = 2.0f;
+	float instructionsSpacing = 2.0f;
 
 	double pauseTimer = 0.0f;
 	double pauseDelay = 0.2f;
-
-	bool isUpButtonPressed = false;
-	bool isDownButtonPressed = false;
-	bool isLeftButtonPressed = false;
-	bool isRightButtonPressed = false;
-	bool isEnterButtonPressed = false;
-
-	double buttonTimer{};
 
 	Rectangle gameScreen{96.0f, 30.0f, 852.0f, 506.0f};
 }

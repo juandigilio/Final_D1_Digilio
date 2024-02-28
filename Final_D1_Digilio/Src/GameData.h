@@ -11,8 +11,6 @@ namespace GameData
 		GAME,
 		RESULTS,
 		PAUSE,
-		INSTRUCTIONS,
-		CREDITS,
 		EXIT,
 	};
 
@@ -22,9 +20,9 @@ namespace GameData
 	extern bool loading;
 	extern int highScore;
 	extern double spawnRateBase ;
-	extern double spawnRateHardnes;
+	extern double spawnRateHardness;
 	extern float enemyBaseSpeed;
-	extern float enemySpeedHardnes;
+	extern float enemySpeedHardness;
 
 	extern Music menuMusic;
 	extern Music gameLoopMusic;
@@ -32,18 +30,10 @@ namespace GameData
 	extern Font font;
 	extern float fontSize;
 	extern float spacing;
-	extern float instrucrtionsSpacing;
+	extern float instructionsSpacing;
 
 	extern double pauseTimer;
 	extern double pauseDelay;
-
-	extern bool isUpButtonPressed;
-	extern bool isDownButtonPressed;
-	extern bool isLeftButtonPressed;
-	extern bool isRightButtonPressed;
-	extern bool isEnterButtonPressed;
-
-	extern double buttonTimer;
 
 	extern Rectangle gameScreen;
 }
