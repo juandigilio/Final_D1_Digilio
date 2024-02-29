@@ -4,6 +4,9 @@
 
 #include "GameData.h"
 #include "CarSelection.h"
+#include "Game.h"
+#include "Parallax.h"
+
 
 using namespace GameData;
 
@@ -17,7 +20,9 @@ namespace SecondScreenManager
 	{
 		if (firstTime)
 		{
-			CarSelection::LoadAssets();
+			CarSelection::InitCarSelection();
+
+			Parallax::InitParallax();
 
 			firstTime = false;
 		}
@@ -31,7 +36,7 @@ namespace SecondScreenManager
 			}
 			case SecondScreen::PLAY:
 			{
-				//GameLoop::Play(player, enemies, currentScreen);
+				Game::PlayGame(player, currentScreen);
 				break;
 			}
 		}
