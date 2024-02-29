@@ -39,6 +39,11 @@ namespace SecondScreenManager
 				Game::PlayGame(player, currentScreen);
 				break;
 			}
+			case SecondScreen::LOOSE:
+			{
+				Game::PlayGame(player, currentScreen);
+				break;
+			}
 		}
 	}
 }

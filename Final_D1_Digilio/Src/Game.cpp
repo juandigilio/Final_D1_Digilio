@@ -45,6 +45,11 @@ namespace Game
 	double lastDrop = 0.0f;
 	double spawnRateBase = 5.4f;
 	double spawnRateHardness = spawnRateBase;
+	float baseSpeed = 200.0f;
+
+	int score = 0;
+	int highScore = 0;
+
 	
 	static void InitGame(Player& player)
 	{
@@ -56,11 +61,30 @@ namespace Game
 		line2 = gameScreen.x + 433.0f - (player.carTexture.width / 2.0f);
 		line3 = gameScreen.x + 601.0f - (player.carTexture.width / 2.0f);
 
-		actualSpeed = 150.0f;
-		maxSpeed = 250.0f;
+		actualSpeed = baseSpeed;
 
 		player.carPosition.x = line2;
 		player.carPosition.y = gameScreen.y + gameScreen.height - player.texture.height;
+	}
+
+	static void ResetGame(Player& player, SecondScreen& currentScreen)
+	{
+		actualSpeed = baseSpeed;
+		player.carPosition.x = line2;
+
+		for (int i = 0; i < enemiesQnty; i++)
+		{
+			enemies[i].isStoped = true;
+		}
+
+		if (score > highScore)
+		{
+			highScore = score;
+		}
+
+		score = 0;
+
+		currentScreen = SecondScreen::LOOSE;
 	}
 
 	static void SetEnemyPosition(Enemy& enemy)
@@ -125,6 +149,36 @@ namespace Game
 
 			isEnterButtonPressed = false;
 		}
+	}
+
+	static void CheckCollisions(Player& player, SecondScreen& currentScreen)
+	{
+		Rectangle playerRec
+		{ 
+			player.position.x, 
+			player.position.y,
+			player.texture.width, 
+			player.texture.height 
+		};
+
+		for (int i = 0; i < enemiesQnty; i++)
+		{
+			Rectangle enemyRec
+			{ 
+				enemies[i].position.x, 
+				enemies[i].position.y, 
+				enemies[i].texture.width, 
+				enemies[i].texture.height
+			};
+
+			if (CheckCollisionRecs(playerRec, enemyRec))
+			{
+				ResetGame(player, currentScreen);
+				break;
+			}
+		}
+
+
 	}
 
 	static void UpdatePlayerCar(Player& player)

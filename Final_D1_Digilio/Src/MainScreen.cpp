@@ -78,7 +78,7 @@ namespace MainScreen
 		Rectangle enterRec = {enterButtonPos.x, enterButtonPos.y, enterButton.width / 2.0f, enterButton.height * 1.0f };
 		Rectangle leftRec = {leftButtonPos.x, leftButtonPos.y, leftButton.width / 2.0f, leftButton.height * 1.0f };
 
-		if (CheckCollisionRecs(player.collisionBox, leftRec))
+		if ( (player.collisionBox, leftRec))
 		{
 			if (!isLeftButtonHold)
 			{

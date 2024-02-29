@@ -15,14 +15,14 @@ namespace GameData
 	enum class SecondScreen
 	{
 		CARSELECTION,
-		PLAY
+		PLAY,
+		LOOSE,
+		WIN
 	};
 
 	extern const int screenWidth;
 	extern const int screenHeight;
 	extern Vector2 screenCenter;
-	extern bool loading;
-	extern int highScore;
 
 	extern Music menuMusic;
 	extern Music gameLoopMusic;
