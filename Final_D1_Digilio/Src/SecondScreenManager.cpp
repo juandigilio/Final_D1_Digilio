@@ -5,6 +5,8 @@
 #include "GameData.h"
 #include "CarSelection.h"
 #include "Game.h"
+#include "Win.h"
+#include "Loose.h"
 #include "Parallax.h"
 
 
@@ -14,7 +16,6 @@ using namespace GameData;
 namespace SecondScreenManager
 {
 	bool firstTime = true;
-	static SecondScreen currentScreen = SecondScreen::CARSELECTION;
 
 	void RunSecondGame(Player& player)
 	{
@@ -27,21 +28,26 @@ namespace SecondScreenManager
 			firstTime = false;
 		}
 
-		switch (currentScreen)
+		switch (miniGameScreen)
 		{
 			case SecondScreen::CARSELECTION:
 			{
-				CarSelection::RunCarSelection(player, currentScreen);
+				CarSelection::RunCarSelection(player, miniGameScreen);
 				break;
 			}
 			case SecondScreen::PLAY:
 			{
-				Game::PlayGame(player, currentScreen);
+				Game::PlayGame(player, miniGameScreen);
 				break;
 			}
 			case SecondScreen::LOOSE:
 			{
-				Game::PlayGame(player, currentScreen);
+				Loose::ShowLooseScreen(miniGameScreen);
+				break;
+			}
+			case SecondScreen::WIN:
+			{
+				Win::ShowWinScreen(miniGameScreen);
 				break;
 			}
 		}
