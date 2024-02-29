@@ -14,6 +14,8 @@ struct Player
     Vector2 velocity{};
     float maxSpeed = 150.0f;
 
+    int line = 2;
+
     Texture2D texture{};
     Rectangle source{};
     Rectangle collisionBox{};

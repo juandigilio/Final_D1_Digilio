@@ -97,7 +97,14 @@ namespace PlayerUtilities
 
         if (IsKeyDown(KEY_ESCAPE) && elapsedTime > pauseDelay)
         {
-            currentScreen = GameScreen::PAUSE;
+            if (currentScreen != GameScreen::GAME)
+            {
+                currentScreen = GameScreen::EXIT;
+            }
+            else
+            {
+                currentScreen = GameScreen::MENU;
+            }
         }
 	}
 
