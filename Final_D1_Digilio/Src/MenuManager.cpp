@@ -63,16 +63,6 @@ namespace MenuManager
 					SecondScreenManager::RunSecondGame(player);
 					break;
 				}
-				case GameScreen::RESULTS:
-				{
-					//FinalResults::ShowResults(player, currentSceen);
-					break;
-				}
-				case GameScreen::PAUSE:
-				{
-					//Pause::ShowPause(currentScreen);
-					break;
-				}
 				case GameScreen::EXIT:
 				{
 					UnloadAssets(player);

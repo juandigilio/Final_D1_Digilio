@@ -9,8 +9,6 @@ namespace GameData
 	{
 		MENU,
 		GAME,
-		RESULTS,
-		PAUSE,
 		EXIT,
 	};
 
