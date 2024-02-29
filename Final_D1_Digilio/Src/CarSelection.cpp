@@ -31,7 +31,7 @@ namespace CarSelection
 	bool isMovingLeft = false;
 	bool isMovingRight = false;
 
-	void LoadAssets()
+	void InitCarSelection()
 	{
 		redCar = LoadTexture("Assets/Images/Game/Cars/RedFerrari.png");
 		blueCar = LoadTexture("Assets/Images/Game/Cars/BlueBugatti.png");

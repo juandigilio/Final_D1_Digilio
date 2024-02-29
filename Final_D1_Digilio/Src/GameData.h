@@ -23,10 +23,6 @@ namespace GameData
 	extern Vector2 screenCenter;
 	extern bool loading;
 	extern int highScore;
-	extern double spawnRateBase ;
-	extern double spawnRateHardness;
-	extern float enemyBaseSpeed;
-	extern float enemySpeedHardness;
 
 	extern Music menuMusic;
 	extern Music gameLoopMusic;

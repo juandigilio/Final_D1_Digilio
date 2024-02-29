@@ -5,12 +5,7 @@ namespace GameData
 	const int screenWidth = 1024;
 	const int screenHeight = 768;
 	Vector2 screenCenter = { screenWidth / 2, screenHeight / 2 };
-	bool loading = true;
 	int highScore = 0;
-	double spawnRateBase  = 1.4f;
-	double spawnRateHardness = spawnRateBase;
-	float enemyBaseSpeed  = 200.0f;
-	float enemySpeedHardness = enemyBaseSpeed;
 
 	Music menuMusic{};
 	Music gameLoopMusic{};
