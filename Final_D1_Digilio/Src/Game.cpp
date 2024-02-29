@@ -29,9 +29,6 @@ namespace Game
 	const int enemiesQnty = 3;
 	Enemy enemies[enemiesQnty];
 
-	float actualSpeed;
-	float maxSpeed;
-
 	float line1;
 	float line2;
 	float line3;
@@ -41,14 +38,17 @@ namespace Game
 
 	bool firstTime = true;
 
+	bool firstDrop = true;
 	int nextToDrop = 0;
 	double lastDrop = 0.0f;
 	double spawnRateBase = 5.4f;
 	double spawnRateHardness = spawnRateBase;
-	float baseSpeed = 200.0f;
+	float actualSpeed;
+	float baseSpeed = 60.0f;
 
 	int score = 0;
 	int highScore = 0;
+	double scoreTimer = 0.0f;
 
 	
 	static void InitGame(Player& player)
@@ -67,9 +67,10 @@ namespace Game
 		player.carPosition.y = gameScreen.y + gameScreen.height - player.texture.height;
 	}
 
-	static void ResetGame(Player& player, SecondScreen& currentScreen)
+	static void ResetGame(Player& player)
 	{
 		actualSpeed = baseSpeed;
+
 		player.carPosition.x = line2;
 
 		for (int i = 0; i < enemiesQnty; i++)
@@ -84,7 +85,7 @@ namespace Game
 
 		score = 0;
 
-		currentScreen = SecondScreen::LOOSE;
+		firstDrop = true;
 	}
 
 	static void SetEnemyPosition(Enemy& enemy)
@@ -113,11 +114,11 @@ namespace Game
 		enemy.position.y = gameScreen.y - enemy.texture.height;	
 	}
 
-	static void GetInput(Player& player, SecondScreen& secondScreen)
+	static void GetInput(Player& player)
 	{
 		SetExitKey(KEY_Q);
 
-		if (isLeftButtonPressed)
+		if (isLeftButtonPressed && !isRightButtonHold)
 		{
 			isLeftButtonPressed = false;
 
@@ -130,7 +131,7 @@ namespace Game
 				player.line--;
 			}
 		}
-		else if (isRightButtonPressed)
+		else if (isRightButtonPressed && !isLeftButtonHold)
 		{
 			isRightButtonPressed = false;
 
@@ -143,39 +144,52 @@ namespace Game
 				player.line++;
 			}
 		}
-		else if (isEnterButtonPressed)
+		else if (isEnterButtonPressed && !isLeftButtonHold && !isRightButtonHold)
 		{
-			secondScreen = SecondScreen::CARSELECTION;
+			miniGameScreen = SecondScreen::CARSELECTION;
 
 			isEnterButtonPressed = false;
 		}
+
+		if (IsKeyDown(KEY_ESCAPE))
+		{
+			pauseTimer = GetTime();
+			miniGameScreen = GameScreen::MENU
+		}
 	}
 
-	static void CheckCollisions(Player& player, SecondScreen& currentScreen)
+	static void CheckCollisions(Player& player)
 	{
 		Rectangle playerRec
 		{ 
-			player.position.x, 
-			player.position.y,
-			player.texture.width, 
-			player.texture.height 
+			player.carPosition.x, 
+			player.carPosition.y,
+			static_cast<float>(player.carTexture.width),
+			static_cast<float>(player.carTexture.height)
 		};
 
 		for (int i = 0; i < enemiesQnty; i++)
 		{
-			Rectangle enemyRec
-			{ 
-				enemies[i].position.x, 
-				enemies[i].position.y, 
-				enemies[i].texture.width, 
-				enemies[i].texture.height
-			};
-
-			if (CheckCollisionRecs(playerRec, enemyRec))
+			if (!enemies[i].isStoped)
 			{
-				ResetGame(player, currentScreen);
-				break;
+				Rectangle enemyRec
+				{
+					enemies[i].position.x,
+					enemies[i].position.y,
+					static_cast<float>(enemies[i].texture.width),
+					static_cast<float>(enemies[i].texture.height)
+				};
+
+				if (CheckCollisionRecs(playerRec, enemyRec))
+				{
+					miniGameScreen = SecondScreen::LOOSE;
+
+					ResetGame(player);
+
+					break;
+				}
 			}
+			
 		}
 
 
@@ -185,7 +199,7 @@ namespace Game
 	{
 		if (isMovingRight)
 		{
-			player.carPosition.x += 100 * GetFrameTime();
+			player.carPosition.x += 170 * GetFrameTime();
 
 			if (player.line == 1)
 			{
@@ -214,7 +228,7 @@ namespace Game
 		}
 		else if (isMovingLeft)
 		{
-			player.carPosition.x -= 100 * GetFrameTime();
+			player.carPosition.x -= 170 * GetFrameTime();
 
 			if (player.line == 1)
 			{
@@ -248,11 +262,32 @@ namespace Game
 
 	static void SpawnEnemies()
 	{
+		int current = nextToDrop - 1;
+
+		if (current < 0)
+		{
+			current = 2;
+		}
+
+		float minY = gameScreen.y + (gameScreen.height / 2.0f);
+
+		bool enoughDistance = (enemies[current].position.y > minY);
+
 		double elapsedTime = GetTime() - lastDrop;
-		
+
 		if (elapsedTime > spawnRateHardness)
 		{
-			if (enemies[nextToDrop].isStoped)
+			if (firstDrop)
+			{
+				enemies[nextToDrop].isStoped = false;
+
+				SetEnemyPosition(enemies[nextToDrop]);
+
+				nextToDrop++;
+
+				firstDrop = false;
+			}
+			else if (enemies[nextToDrop].isStoped && enoughDistance)
 			{
 				enemies[nextToDrop].isStoped = false;
 
@@ -266,8 +301,6 @@ namespace Game
 				}
 
 				lastDrop = GetTime();
-
-				//cout << "Droped " << nextToDrop << endl;
 			}		
 		}
 	}
@@ -292,13 +325,49 @@ namespace Game
 		}
 	}
 
+	static void UpdatePoints(Player& player)
+	{
+		double elapsedTime = GetTime() - scoreTimer;
+
+		if (elapsedTime > 0.1f)
+		{
+			score++;
+
+			scoreTimer = GetTime();
+		}
+
+		if (score >= 15)
+		{
+			ResetGame(player);
+
+			miniGameScreen = SecondScreen::WIN;
+		}
+		else if(score * 0.25f > baseSpeed)
+		{		
+			actualSpeed = score * 0.25f;		
+		}
+	}
+
 	static void Update(Player& player)
 	{
 		UpdatePlayerCar(player);
 
+		UpdatePoints(player, miniGameScreen);
+
 		UpdateEnemies();
 
 		Parallax::UpdateParallax(actualSpeed);
+
+		CheckCollisions(player, miniGameScreen);
+	}
+
+	static void DrawScore()
+	{
+		const char* scoreTxt = TextFormat("%i", score);
+		
+		Vector2 scorePos{gameScreen.x + 20.0f, gameScreen.y + 20.0f};
+		
+		DrawTextEx(font, scoreTxt, scorePos, fontSize * 1.1f, spacing, WHITE);
 	}
 
 	static void DrawGame(Player player)
@@ -314,9 +383,11 @@ namespace Game
 		}
 
 		DrawTextureV(player.carTexture, player.carPosition, RAYWHITE);
+
+		DrawScore();
 	}
 
-	void PlayGame(Player& player, SecondScreen& secondScreen)
+	void PlayGame(Player& player)
 	{
 		if (firstTime)
 		{
@@ -325,9 +396,9 @@ namespace Game
 			firstTime = false;
 		}
 
-		GetInput(player, secondScreen);
+		GetInput(player, miniGameScreen);
 
-		Update(player);
+		Update(player, miniGameScreen);
 
 		DrawGame(player);
 	}

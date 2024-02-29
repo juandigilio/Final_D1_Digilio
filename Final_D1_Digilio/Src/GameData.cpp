@@ -17,5 +17,9 @@ namespace GameData
 	double pauseTimer = 0.0f;
 	double pauseDelay = 0.2f;
 
+	bool hasWon = false;
+	GameScreen currentScreen = GameScreen::MENU;
+	SecondScreen miniGameScreen = SecondScreen::CARSELECTION;
+
 	Rectangle gameScreen{96.0f, 30.0f, 852.0f, 506.0f};
 }
