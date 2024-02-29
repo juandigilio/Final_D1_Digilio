@@ -2,6 +2,9 @@
 
 #include "GameData.h"
 
+using namespace GameData;
+
+
 namespace MainScreen
 {
 	Texture2D mainBackground;
@@ -78,7 +81,7 @@ namespace MainScreen
 		Rectangle enterRec = {enterButtonPos.x, enterButtonPos.y, enterButton.width / 2.0f, enterButton.height * 1.0f };
 		Rectangle leftRec = {leftButtonPos.x, leftButtonPos.y, leftButton.width / 2.0f, leftButton.height * 1.0f };
 
-		if ( (player.collisionBox, leftRec))
+		if ( CheckCollisionRecs(player.collisionBox, leftRec))
 		{
 			if (!isLeftButtonHold)
 			{
@@ -135,9 +138,21 @@ namespace MainScreen
 		PlayerUtilities::DrawPlayer(player);
 	}
 
-	void RunMainScreen(Player& player, GameScreen& currentScreen)
+	static void CheckWiningCondition()
 	{
-		PlayerUtilities::UpdatePlayer(player, currentScreen);
+		if (hasWon)
+		{
+			currentScreen = GameScreen::MENU;
+
+			hasWon = false;
+		}
+	}
+
+	void RunMainScreen(Player& player)
+	{
+		PlayerUtilities::UpdatePlayer(player);
+
+		CheckWiningCondition();
 
 		CheckButtonsCollision(player);
 

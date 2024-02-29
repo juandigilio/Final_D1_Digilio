@@ -39,9 +39,20 @@ namespace MenuManager
 		Game::UnloadAssets();
 	}
 
+	static void ClearScreen()
+	{
+		if (miniGameScreen == SecondScreen::WIN)
+		{
+			ClearBackground(BLUE);
+		}
+		else
+		{
+			ClearBackground(BLACK);
+		}
+	}
+
 	void RunGame()
 	{
-		GameScreen currentScreen = GameScreen::MENU;
 		Player player;
 
 		StartUp(player);
@@ -49,7 +60,8 @@ namespace MenuManager
 		while (currentScreen != GameScreen::EXIT && !WindowShouldClose())
 		{
 			BeginDrawing();
-			ClearBackground(BLACK);
+
+			ClearScreen();
 
 			switch (currentScreen)
 			{

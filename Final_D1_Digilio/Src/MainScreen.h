@@ -7,7 +7,11 @@
 namespace MainScreen
 {
 	extern bool isLeftButtonPressed;
+	extern bool isLeftButtonHold;
+
 	extern bool isRightButtonPressed;
+	extern bool isRightButtonHold;
+
 	extern bool isEnterButtonPressed;
 
 	extern bool isComputerOn;
