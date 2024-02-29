@@ -12,25 +12,25 @@ namespace Parallax
 	Vector2 backgroundPos;
 	Vector2 backgroundPos2;
 
-	static void InitParllax()
+	void InitParallax()
 	{
 		gameBackground = LoadTexture("Assets/Images/Game/RoadBackground.png");
 
 		backgroundPos.x = gameScreen.x;
-		backgroundPos.y = gameScreen.y;
+		backgroundPos.y = gameScreen.y - gameBackground.height + gameScreen.height;
 
 		backgroundPos2.x = backgroundPos.x;
-		backgroundPos2.y = backgroundPos.y + gameBackground.height;
+		backgroundPos2.y = backgroundPos.y - gameBackground.height;
 	}
 
 	void UpdateParallax(float actualSpeed)
 	{
 		float limit = gameScreen.y + gameScreen.height;
 
-		actualSpeed *= 1.6f;
+		actualSpeed *= 0.5f;
 
 		backgroundPos.y += actualSpeed * GetFrameTime();
-		backgroundPos.y += actualSpeed * GetFrameTime();
+		backgroundPos2.y += actualSpeed * GetFrameTime();
 
 		if (backgroundPos.y > limit)
 		{
