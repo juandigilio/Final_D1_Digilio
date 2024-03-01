@@ -27,7 +27,7 @@ namespace Parallax
 	{
 		float limit = gameScreen.y + gameScreen.height;
 
-		actualSpeed *= 2.5f;
+		actualSpeed *= 4.0f;
 
 		backgroundPos.y += actualSpeed * GetFrameTime();
 		backgroundPos2.y += actualSpeed * GetFrameTime();
