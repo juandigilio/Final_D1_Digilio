@@ -35,5 +35,9 @@ namespace GameData
 	extern double pauseTimer;
 	extern double pauseDelay;
 
+	extern bool hasWon;
+	extern GameScreen currentScreen;
+	extern SecondScreen miniGameScreen;
+
 	extern Rectangle gameScreen;
 }

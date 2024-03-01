@@ -67,7 +67,7 @@ namespace MenuManager
 			{
 				case GameScreen::MENU:
 				{
-					Menu::ShowMenu(currentScreen);
+					Menu::ShowMenu();
 					break;
 				}
 				case GameScreen::GAME:
@@ -83,7 +83,7 @@ namespace MenuManager
 				}
 			}
 
-			MainScreen::RunMainScreen(player, currentScreen);
+			MainScreen::RunMainScreen(player);
 
 			EndDrawing();
 		}

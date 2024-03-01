@@ -42,10 +42,8 @@ namespace Menu
 		pos4 = pos3 - gameScreen.width;
 	}
 
-	static void GetInput(GameScreen& currentScreen)
+	static void GetInput()
 	{
-		SetExitKey(KEY_ESCAPE);
-
 		if (isLeftButtonPressed)
 		{
 			isLeftButtonPressed = false;
@@ -195,11 +193,11 @@ namespace Menu
 		DrawExit(playPos);
 	}
 
-	void ShowMenu(GameScreen& currentScreen)
+	void ShowMenu()
 	{
 		if (MainScreen::isComputerOn)
 		{
-			GetInput(currentScreen);
+			GetInput();
 
 			UpdateMenu();
 

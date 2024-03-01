@@ -32,22 +32,22 @@ namespace SecondScreenManager
 		{
 			case SecondScreen::CARSELECTION:
 			{
-				CarSelection::RunCarSelection(player, miniGameScreen);
+				CarSelection::RunCarSelection(player);
 				break;
 			}
 			case SecondScreen::PLAY:
 			{
-				Game::PlayGame(player, miniGameScreen);
+				Game::PlayGame(player);
 				break;
 			}
 			case SecondScreen::LOOSE:
 			{
-				Loose::ShowLooseScreen(miniGameScreen);
+				Loose::ShowLooseScreen();
 				break;
 			}
 			case SecondScreen::WIN:
 			{
-				Win::ShowWinScreen(miniGameScreen);
+				Win::ShowWinScreen();
 				break;
 			}
 		}

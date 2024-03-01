@@ -7,7 +7,7 @@ namespace CarSelection
 {
 	extern void InitCarSelection();
 
-	extern void RunCarSelection(Player& player, SecondScreen& secondScreen);
+	extern void RunCarSelection(Player& player);
 
 	extern void UnloadAssets();
 }

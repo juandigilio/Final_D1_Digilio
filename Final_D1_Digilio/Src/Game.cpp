@@ -154,7 +154,8 @@ namespace Game
 		if (IsKeyDown(KEY_ESCAPE))
 		{
 			pauseTimer = GetTime();
-			miniGameScreen = GameScreen::MENU
+			miniGameScreen = SecondScreen::CARSELECTION;
+			currentScreen = GameScreen::MENU;
 		}
 	}
 
@@ -336,7 +337,7 @@ namespace Game
 			scoreTimer = GetTime();
 		}
 
-		if (score >= 15)
+		if (score >= 999)
 		{
 			ResetGame(player);
 
@@ -352,13 +353,13 @@ namespace Game
 	{
 		UpdatePlayerCar(player);
 
-		UpdatePoints(player, miniGameScreen);
+		UpdatePoints(player);
 
 		UpdateEnemies();
 
 		Parallax::UpdateParallax(actualSpeed);
 
-		CheckCollisions(player, miniGameScreen);
+		CheckCollisions(player);
 	}
 
 	static void DrawScore()
@@ -396,9 +397,9 @@ namespace Game
 			firstTime = false;
 		}
 
-		GetInput(player, miniGameScreen);
+		GetInput(player);
 
-		Update(player, miniGameScreen);
+		Update(player);
 
 		DrawGame(player);
 	}

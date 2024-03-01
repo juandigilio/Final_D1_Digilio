@@ -17,6 +17,6 @@ namespace MainScreen
 	extern bool isComputerOn;
 
 	extern void LoadAssets(Player& player);
-	extern void RunMainScreen(Player& player, GameScreen& gameScreen);
+	extern void RunMainScreen(Player& player);
 	extern void UnloadMainAssets();
 }

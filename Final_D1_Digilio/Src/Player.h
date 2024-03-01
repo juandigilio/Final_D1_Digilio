@@ -39,9 +39,9 @@ namespace PlayerUtilities
 {
     extern void LoadPlayer(Player& player);
 
-    extern void GetPlayerInput(Player& player, GameScreen& currentScreen);
+    extern void GetPlayerInput(Player& player);
 
-    extern void UpdatePlayer(Player& player, GameScreen& currentScreen);
+    extern void UpdatePlayer(Player& player);
 
     extern void DrawPlayer(Player& player);
 

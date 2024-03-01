@@ -5,6 +5,6 @@
 
 namespace Game
 {
-	extern void PlayGame(Player& player, SecondScreen& secondScreen);
+	extern void PlayGame(Player& player);
 	extern void UnloadAssets();
 }

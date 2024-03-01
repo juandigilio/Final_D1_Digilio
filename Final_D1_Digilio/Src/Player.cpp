@@ -50,8 +50,13 @@ namespace PlayerUtilities
         }
     }
 
-	void GetPlayerInput(Player& player, GameScreen& currentScreen)
+	void GetPlayerInput(Player& player)
 	{
+        if (currentScreen == GameScreen::GAME)
+        {
+            SetExitKey(KEY_Q);
+        }
+ 
         SetExitKey(KEY_Q);
 
         if (IsKeyDown(KEY_UP))
@@ -108,11 +113,11 @@ namespace PlayerUtilities
         }
 	}
 
-	void UpdatePlayer(Player& player, GameScreen& currentScreen)
+	void UpdatePlayer(Player& player)
 	{
         MovePlayer(player);
 
-        GetPlayerInput(player, currentScreen);
+        GetPlayerInput(player);
 	}
 
 	void DrawPlayer(Player& player)

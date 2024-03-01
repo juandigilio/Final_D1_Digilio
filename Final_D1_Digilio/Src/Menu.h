@@ -10,5 +10,5 @@ using namespace GameData;
 namespace Menu
 {
 	extern void InitMenu();
-	extern void ShowMenu(GameScreen& currentScreen);
+	extern void ShowMenu();
 }

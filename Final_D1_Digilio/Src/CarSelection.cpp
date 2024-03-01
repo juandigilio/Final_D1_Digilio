@@ -48,10 +48,8 @@ namespace CarSelection
 		yellowCarPos.y = gameScreen.y + (gameScreen.height / 2.0f) - (yellowCar.height / 2.0f);
 	}
 
-	static void GetInput(Player& player, SecondScreen& secondScreen)
+	static void GetInput(Player& player)
 	{
-		SetExitKey(KEY_ESCAPE);
-
 		if (isLeftButtonPressed)
 		{
 			isLeftButtonPressed = false;
@@ -94,9 +92,14 @@ namespace CarSelection
 				player.carTexture = LoadTexture("Assets/Images/Game/Cars/YellowCarTopView.png");
 			}
 
-			secondScreen = SecondScreen::PLAY;
+			miniGameScreen = SecondScreen::PLAY;
 
 			isEnterButtonPressed = false;
+		}
+
+		if (IsKeyDown(KEY_ESCAPE))
+		{
+			pauseTimer = GetTime();
 		}
 	}
 
@@ -177,9 +180,9 @@ namespace CarSelection
 		DrawTextureV(yellowCar, yellowCarPos, WHITE);
 	}
 
-	void RunCarSelection(Player& player, SecondScreen& secondScreen)
+	void RunCarSelection(Player& player)
 	{
-		GetInput(player, secondScreen);
+		GetInput(player);
 
 		UpdateCarsPositions();
 
