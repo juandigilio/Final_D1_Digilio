@@ -87,6 +87,10 @@ namespace Game
 		score = 0;
 
 		firstDrop = true;
+
+
+		isMovingLeft = false;
+		isMovingRight = false;
 	}
 
 	static void SetEnemyPosition(Enemy& enemy)
@@ -332,7 +336,7 @@ namespace Game
 		}
 	}
 
-	static void UpdatePoints(Player& player)
+	static void UpdateScore(Player& player)
 	{
 		double elapsedTime = GetTime() - scoreTimer;
 
@@ -343,7 +347,7 @@ namespace Game
 			scoreTimer = GetTime();
 		}
 
-		if (score >= 999)
+		if (score >= 10)
 		{
 			ResetGame(player);
 
@@ -359,7 +363,7 @@ namespace Game
 	{
 		UpdatePlayerCar(player);
 
-		UpdatePoints(player);
+		UpdateScore(player);
 
 		UpdateEnemies();
 
