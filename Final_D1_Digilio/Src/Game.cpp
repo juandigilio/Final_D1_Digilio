@@ -70,6 +70,7 @@ namespace Game
 	static void ResetGame(Player& player)
 	{
 		actualSpeed = baseSpeed;
+		spawnRateHardness = spawnRateBase;
 
 		player.carPosition.x = line2;
 
@@ -149,13 +150,18 @@ namespace Game
 			miniGameScreen = SecondScreen::CARSELECTION;
 
 			isEnterButtonPressed = false;
+
+			ResetGame(player);
 		}
 
 		if (IsKeyDown(KEY_ESCAPE))
 		{
 			pauseTimer = GetTime();
+
 			miniGameScreen = SecondScreen::CARSELECTION;
 			currentScreen = GameScreen::MENU;
+
+			ResetGame(player);
 		}
 	}
 
@@ -343,9 +349,9 @@ namespace Game
 
 			miniGameScreen = SecondScreen::WIN;
 		}
-		else if(score * 0.25f > baseSpeed)
+		else if(score * 0.3f > baseSpeed)
 		{		
-			actualSpeed = score * 0.25f;		
+			actualSpeed = score * 0.3f;		
 		}
 	}
 
@@ -366,7 +372,7 @@ namespace Game
 	{
 		const char* scoreTxt = TextFormat("%i", score);
 		
-		Vector2 scorePos{gameScreen.x + 20.0f, gameScreen.y + 20.0f};
+		Vector2 scorePos{gameScreen.x + 40.0f, gameScreen.y + 40.0f};
 		
 		DrawTextEx(font, scoreTxt, scorePos, fontSize * 1.1f, spacing, WHITE);
 	}
