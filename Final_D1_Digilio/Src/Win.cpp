@@ -10,13 +10,21 @@ namespace Win
 	Vector2 pos1;
 	Vector2 pos2;
 
-	static void SetPositions()
-	{
-		pos1.x = gameScreen.x + 30.0f;
-		pos1.y = gameScreen.y + 30.0f;
+	Texture2D face;
+	Vector2 facePos;
 
-		pos2.x = gameScreen.x + 30.0f;
-		pos2.y = gameScreen.y + 70.0f;
+	static void LoadWinScreen()
+	{
+		face = LoadTexture("Assets/Images/Game/BadFace.png");
+
+		facePos.x = gameScreen.x + 40.0f;
+		facePos.y = gameScreen.y + 40.0f;
+
+		pos1.x = facePos.x;
+		pos1.y = facePos.y + face.width + 50.0f;
+
+		pos2.x = facePos.x;
+		pos2.y = pos1.y + 30.0f;
 	}
 
 	void ShowWinScreen()
@@ -27,9 +35,10 @@ namespace Win
 
 			firstTime = false;
 
-			SetPositions();
+			LoadWinScreen();
 		}
 
+		DrawTextureV(face, facePos, RAYWHITE);
 		DrawTextEx(font, "Your PC ran into a problem that it couldn't", pos1, fontSize * 0.5f, spacing, WHITE);
 		DrawTextEx(font, "handle, and now it needs to restart", pos2, fontSize * 0.5f, spacing, WHITE);
 
