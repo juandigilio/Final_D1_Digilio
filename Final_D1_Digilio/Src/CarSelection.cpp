@@ -21,10 +21,12 @@ namespace CarSelection
 	Texture yellowCar;
 	Vector2 yellowCarPos;
 
+	Vector2 backPos;
 
 	float pos1;
 	float pos2;
 	float pos3;
+	float pos4;
 
 	int menuPos = 1;
 
@@ -40,6 +42,7 @@ namespace CarSelection
 		pos1 = gameScreen.x + (gameScreen.width / 2.0f) - (redCar.width / 2.0f);
 		pos2 = gameScreen.x - (gameScreen.width * 1.5f) - (blueCar.width / 2.0f);
 		pos3 = gameScreen.x - (gameScreen.width * 2.5f) - (yellowCar.width / 2.0f);
+		pos4 = gameScreen.x - (gameScreen.width * 3.5f) - (yellowCar.width / 2.0f);
 
 		redCarPos.x = pos1;
 		
@@ -56,7 +59,7 @@ namespace CarSelection
 
 			isMovingRight = false;
 
-			if (menuPos < 3)
+			if (menuPos < 4)
 			{
 				isMovingLeft = true;
 
@@ -79,22 +82,31 @@ namespace CarSelection
 
 		if (isEnterButtonPressed)
 		{
-			if (menuPos == 1)
+			if (menuPos == 4)
 			{
-				player.carTexture = LoadTexture("Assets/Images/Game/Cars/RedCarTopView.png");
+				currentScreen = GameScreen::MENU;
 			}
-			else if (menuPos == 2)
+			else
 			{
-				player.carTexture = LoadTexture("Assets/Images/Game/Cars/BlueCarTopView.png");
-			}
-			else if (menuPos == 3)
-			{
-				player.carTexture = LoadTexture("Assets/Images/Game/Cars/YellowCarTopView.png");
-			}
+				if (menuPos == 1)
+				{
+					player.carTexture = LoadTexture("Assets/Images/Game/Cars/RedCarTopView.png");
+				}
+				else if (menuPos == 2)
+				{
+					player.carTexture = LoadTexture("Assets/Images/Game/Cars/BlueCarTopView.png");
+				}
+				else if (menuPos == 3)
+				{
+					player.carTexture = LoadTexture("Assets/Images/Game/Cars/YellowCarTopView.png");
+				}
 
-			miniGameScreen = SecondScreen::PLAY;
-
+				miniGameScreen = SecondScreen::PLAY;
+			}
+			
 			isEnterButtonPressed = false;
+
+			PlayMusicStream(gameplayMusic);
 		}
 
 		if (IsKeyDown(KEY_ESCAPE))
@@ -165,12 +177,22 @@ namespace CarSelection
 					isMovingLeft = false;
 				}
 			}
+			else if (menuPos == 4)
+			{
+				if (redCarPos.x <= pos4)
+				{
+					redCarPos.x = pos4;
+
+					isMovingLeft = false;
+				}
+			}
 		}
 
 		blueCarPos.x = redCarPos.x + (redCar.width / 2.0f) + gameScreen.width + (blueCar.width / 2.0f) + 190.0f;
 		yellowCarPos.x = redCarPos.x + (redCar.width / 2.0f) + (gameScreen.width * 2.0f) + (yellowCar.width / 2.0f) + 210.0f;
 
-		//UpdateMusicStream(menuMusic);
+		backPos.x = yellowCarPos.x + (redCar.width / 2.0f) + (gameScreen.width) - (MeasureTextEx(font, "Back", fontSize * 0.85f, spacing / 2.0f).x / 2.0f);
+		backPos.y = gameScreen.y + (gameScreen.height / 2.0f) - 20.0f;
 	}
 
 	static void DrawCars()
@@ -178,6 +200,8 @@ namespace CarSelection
 		DrawTextureV(redCar, redCarPos, WHITE);
 		DrawTextureV(blueCar, blueCarPos, WHITE);
 		DrawTextureV(yellowCar, yellowCarPos, WHITE);
+		
+		DrawTextEx(font, "Back", backPos, fontSize * 0.85f, spacing / 2.0f, WHITE);
 	}
 
 	void RunCarSelection(Player& player)
