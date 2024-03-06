@@ -20,6 +20,12 @@ namespace MainScreen
 	Texture2D enterButton;
 	Vector2 enterButtonPos;
 
+	Texture2D itchIo;
+	Vector2 itchIoPos;
+
+	Texture2D gitHub;
+	Vector2 gitHubPos;
+
 	Sound keySound;
 
 	bool isLeftButtonPressed = false;
@@ -30,6 +36,9 @@ namespace MainScreen
 
 	bool isEnterButtonPressed = false;
 	bool isEnterButtonHold = false;
+
+	bool isItchIoHold = false;
+	bool isGitHubHold = false;
 
 	bool isComputerOn = false;
 	
@@ -43,6 +52,12 @@ namespace MainScreen
 
 		rightButtonPos.x = leftButtonPos.x + (leftButton.width / 2.0f) + 10.0f;
 		rightButtonPos.y = leftButtonPos.y - 5.0f;
+
+		itchIoPos.x = static_cast<float>(screenWidth) - itchIo.width;
+		itchIoPos.y = pad.y - 40.0f;
+
+		gitHubPos.x = itchIoPos.x;
+		gitHubPos.y = itchIoPos.y + itchIo.height;
 	}
 
 	void LoadAssets(Player& player)
@@ -51,6 +66,9 @@ namespace MainScreen
 		leftButton = LoadTexture("Assets/Images/Main/LeftButton.png");
 		rightButton = LoadTexture("Assets/Images/Main/RightButton.png");
 		enterButton = LoadTexture("Assets/Images/Main/EnterButton.png");
+
+		itchIo = LoadTexture("Assets/Images/ItchIo.png");
+		gitHub = LoadTexture("Assets/Images/GitHub.png");
 
 		keySound = LoadSound("Assets/Sounds/KeySound.wav");
 		gameplayMusic = LoadMusicStream("Assets/Sounds/GamePlayMusic.wav");
@@ -85,6 +103,9 @@ namespace MainScreen
 		Rectangle rightRec = {rightButtonPos.x, rightButtonPos.y, rightButton.width / 2.0f, rightButton.height * 1.0f };
 		Rectangle enterRec = {enterButtonPos.x, enterButtonPos.y, enterButton.width / 2.0f, enterButton.height * 1.0f };
 		Rectangle leftRec = {leftButtonPos.x, leftButtonPos.y, leftButton.width / 2.0f, leftButton.height * 1.0f };
+
+		Rectangle itchIoRec = {itchIoPos.x, itchIoPos.y, itchIo.width / 2.0f, itchIo.height * 1.0f };
+		Rectangle gitHubRec = {gitHubPos.x, gitHubPos.y, gitHub.width / 2.0f, gitHub.height * 1.0f };
 
 		if ( CheckCollisionRecs(player.collisionBox, leftRec))
 		{
@@ -133,11 +154,43 @@ namespace MainScreen
 		{
 			isEnterButtonHold = false;
 		}
+
+		if (CheckCollisionRecs(player.collisionBox, itchIoRec))
+		{
+			if (!isItchIoHold)
+			{
+				OpenURL("https://juandigilio.itch.io");
+
+				isItchIoHold = true;
+			}
+		}
+		else
+		{
+			isItchIoHold = false;
+		}
+		
+
+		if (CheckCollisionRecs(player.collisionBox, gitHubRec))
+		{
+			if (!isGitHubHold)
+			{
+				OpenURL("https://github.com/juandigilio");
+
+				isGitHubHold = true;
+			}
+		}
+		else
+		{
+			isGitHubHold = false;
+		}
 	}
 
 	static void DrawMainScreen(Player& player)
 	{
 		DrawTexture(mainBackground, 0, 0, WHITE);
+
+		DrawTextureV(itchIo,itchIoPos, WHITE);
+		DrawTextureV(gitHub,gitHubPos, WHITE);
 
 		DrawButton(leftButton, leftButtonPos, isLeftButtonHold);
 		DrawButton(rightButton, rightButtonPos, isRightButtonHold);
@@ -173,6 +226,9 @@ namespace MainScreen
 		UnloadTexture(leftButton);
 		UnloadTexture(rightButton);
 		UnloadTexture(enterButton);
+
+		UnloadTexture(itchIo);
+		UnloadTexture(gitHub);
 
 		UnloadSound(keySound);
 		UnloadMusicStream(gameplayMusic);
