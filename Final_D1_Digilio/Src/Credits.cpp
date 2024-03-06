@@ -25,5 +25,11 @@ namespace Credits
 		actualPos.x = actualPos.x + gameScreen.width * 2.0f - (MeasureTextEx(font, "Cars assets by TheMemeLord4", fontSize * 0.25f, spacing / 8.0f).x / 2.0f);
 		actualPos.y += 120.0f;
 		DrawTextEx(font, "Cars assets by TheMemeLord4", actualPos, fontSize * 0.25f, spacing / 8.0f, WHITE);
+		
+		actualPos = playPosCenter;
+
+		actualPos.x = actualPos.x + gameScreen.width * 2.0f - (MeasureTextEx(font, "Music & sounds downloaded from pixabay.com", fontSize * 0.25f, spacing / 8.0f).x / 2.0f);
+		actualPos.y += 145.0f;
+		DrawTextEx(font, "Music & sounds downloaded from pixabay.com", actualPos, fontSize * 0.25f, spacing / 8.0f, WHITE);
 	}
 }
