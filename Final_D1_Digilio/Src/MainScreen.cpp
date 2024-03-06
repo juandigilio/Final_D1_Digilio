@@ -20,6 +20,8 @@ namespace MainScreen
 	Texture2D enterButton;
 	Vector2 enterButtonPos;
 
+	Sound keySound;
+
 	bool isLeftButtonPressed = false;
 	bool isLeftButtonHold = false;
 
@@ -49,6 +51,9 @@ namespace MainScreen
 		leftButton = LoadTexture("Assets/Images/Main/LeftButton.png");
 		rightButton = LoadTexture("Assets/Images/Main/RightButton.png");
 		enterButton = LoadTexture("Assets/Images/Main/EnterButton.png");
+
+		keySound = LoadSound("Assets/Sounds/KeySound.wav");
+		gameplayMusic = LoadMusicStream("Assets/Sounds/GamePlayMusic.wav");
 
 		PlayerUtilities::LoadPlayer(player);
 
@@ -87,6 +92,7 @@ namespace MainScreen
 			{
 				isLeftButtonPressed = true;
 				isLeftButtonHold = true;
+				PlaySound(keySound);
 			}
 		}
 		else
@@ -100,6 +106,7 @@ namespace MainScreen
 			{
 				isRightButtonPressed = true;
 				isRightButtonHold = true;
+				PlaySound(keySound);
 			}
 		}
 		else
@@ -113,6 +120,7 @@ namespace MainScreen
 			{
 				isEnterButtonPressed = true;
 				isEnterButtonHold = true;
+				PlaySound(keySound);
 			}
 
 			if (!isComputerOn)
@@ -165,6 +173,9 @@ namespace MainScreen
 		UnloadTexture(leftButton);
 		UnloadTexture(rightButton);
 		UnloadTexture(enterButton);
+
+		UnloadSound(keySound);
+		UnloadMusicStream(gameplayMusic);
 		
 		UnloadFont(GameData::font);
 	}

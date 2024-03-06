@@ -6,9 +6,6 @@ namespace GameData
 	const int screenHeight = 768;
 	Vector2 screenCenter = { screenWidth / 2, screenHeight / 2 };
 
-	Music menuMusic{};
-	Music gameLoopMusic{};
-
 	Font font{};
 	float fontSize{};
 	float spacing = 8.0f;
@@ -22,4 +19,6 @@ namespace GameData
 	SecondScreen miniGameScreen = SecondScreen::CARSELECTION;
 
 	Rectangle gameScreen{96.0f, 30.0f, 852.0f, 506.0f};
+
+	Music gameplayMusic{};
 }

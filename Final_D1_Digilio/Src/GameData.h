@@ -24,9 +24,6 @@ namespace GameData
 	extern const int screenHeight;
 	extern Vector2 screenCenter;
 
-	extern Music menuMusic;
-	extern Music gameLoopMusic;
-
 	extern Font font;
 	extern float fontSize;
 	extern float spacing;
@@ -40,4 +37,6 @@ namespace GameData
 	extern SecondScreen miniGameScreen;
 
 	extern Rectangle gameScreen;
+
+	extern Music gameplayMusic;
 }

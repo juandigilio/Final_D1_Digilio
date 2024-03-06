@@ -167,8 +167,6 @@ namespace Menu
 				}
 			}
 		}
-
-		UpdateMusicStream(menuMusic);
 	}
 
 	static void DrawExit(Vector2 playPosition)
