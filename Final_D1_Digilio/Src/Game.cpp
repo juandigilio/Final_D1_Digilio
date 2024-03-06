@@ -72,7 +72,12 @@ namespace Game
 		actualSpeed = baseSpeed;
 		spawnRateHardness = spawnRateBase;
 
+		nextToDrop = 0;
+		firstDrop = true;
+		lastDrop = GetTime();
+
 		player.carPosition.x = line2;
+		player.line = 2;
 
 		for (int i = 0; i < enemiesQnty; i++)
 		{
@@ -86,11 +91,13 @@ namespace Game
 
 		score = 0;
 
-		firstDrop = true;
-
-
 		isMovingLeft = false;
 		isMovingRight = false;
+
+		isLeftButtonPressed = false;
+		isRightButtonPressed = false;
+		isLeftButtonHold = false;
+		isRightButtonHold = false;
 	}
 
 	static void SetEnemyPosition(Enemy& enemy)
@@ -155,6 +162,8 @@ namespace Game
 
 			isEnterButtonPressed = false;
 
+			StopMusicStream(gameplayMusic);
+
 			ResetGame(player);
 		}
 
@@ -164,6 +173,8 @@ namespace Game
 
 			miniGameScreen = SecondScreen::CARSELECTION;
 			currentScreen = GameScreen::MENU;
+
+			StopMusicStream(gameplayMusic);
 
 			ResetGame(player);
 		}
@@ -194,6 +205,8 @@ namespace Game
 				if (CheckCollisionRecs(playerRec, enemyRec))
 				{
 					miniGameScreen = SecondScreen::LOOSE;
+
+					StopMusicStream(gameplayMusic);
 
 					ResetGame(player);
 
@@ -347,7 +360,7 @@ namespace Game
 			scoreTimer = GetTime();
 		}
 
-		if (score >= 10)
+		if (score >= 999)
 		{
 			ResetGame(player);
 
@@ -357,6 +370,8 @@ namespace Game
 		{		
 			actualSpeed = score * 0.3f;		
 		}
+
+		spawnRateHardness = spawnRateBase - (score / 300.0f);
 	}
 
 	static void Update(Player& player)
@@ -368,6 +383,8 @@ namespace Game
 		UpdateEnemies();
 
 		Parallax::UpdateParallax(actualSpeed);
+
+		UpdateMusicStream(gameplayMusic);
 
 		CheckCollisions(player);
 	}
