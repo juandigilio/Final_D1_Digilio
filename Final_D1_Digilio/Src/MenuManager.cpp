@@ -23,7 +23,7 @@ namespace MenuManager
 
 		SetConfigFlags(FLAG_MSAA_4X_HINT);
 
-		InitWindow(screenWidth, screenHeight, "Gran-Turismo 14");
+		InitWindow(screenWidth, screenHeight, "Dyno Street Racing");
 
 		InitAudioDevice();
 
