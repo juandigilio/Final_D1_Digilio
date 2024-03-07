@@ -53,7 +53,7 @@ namespace CarSelection
 
 	static void GetInput(Player& player)
 	{
-		if (isLeftButtonPressed)
+		if (isLeftButtonPressed && !isRightButtonHold)
 		{
 			isLeftButtonPressed = false;
 
@@ -66,7 +66,7 @@ namespace CarSelection
 				menuPos++;
 			}
 		}
-		else if (isRightButtonPressed)
+		else if (isRightButtonPressed && !isLeftButtonHold)
 		{
 			isRightButtonPressed = false;
 

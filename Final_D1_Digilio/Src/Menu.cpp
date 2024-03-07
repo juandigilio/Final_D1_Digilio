@@ -82,6 +82,9 @@ namespace Menu
 				currentScreen = GameScreen::EXIT;
 			}
 
+			menuPos = 1;
+			playPos.x = pos1;
+
 			isEnterButtonPressed = false;
 		}
 	}

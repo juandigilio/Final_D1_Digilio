@@ -184,10 +184,10 @@ namespace Game
 	{
 		Rectangle playerRec
 		{ 
-			player.carPosition.x, 
-			player.carPosition.y,
-			static_cast<float>(player.carTexture.width),
-			static_cast<float>(player.carTexture.height)
+			player.carPosition.x + 15.0f, 
+			player.carPosition.y + 15.0f,
+			static_cast<float>(player.carTexture.width - 30.0f),
+			static_cast<float>(player.carTexture.height - 30.0f)
 		};
 
 		for (int i = 0; i < enemiesQnty; i++)
@@ -196,10 +196,10 @@ namespace Game
 			{
 				Rectangle enemyRec
 				{
-					enemies[i].position.x,
-					enemies[i].position.y,
-					static_cast<float>(enemies[i].texture.width),
-					static_cast<float>(enemies[i].texture.height)
+					enemies[i].position.x + 10.0f,
+					enemies[i].position.y + 10.0f,
+					static_cast<float>(enemies[i].texture.width - 10.0f),
+					static_cast<float>(enemies[i].texture.height - 10.0f)
 				};
 
 				if (CheckCollisionRecs(playerRec, enemyRec))
